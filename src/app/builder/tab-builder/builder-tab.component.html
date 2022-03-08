@@ -1,0 +1,58 @@
+<div class="builder-page">
+  <div class="builder">
+    <div class="items">
+      <div class="items-list">
+        <div class="base-items">
+          <h2>Base</h2>
+          <button class="item-btn" *ngFor="let item of baseItems" (click)="addItem(item)">
+            <img [src]="item.src" alt="" [matTooltip]="item.name">
+          </button>
+        </div>
+        <div class="combined-items">
+          <h2>Combined</h2>
+          <button class="item-btn" *ngFor="let item of combinedItems" (click)="addItem(item)">
+            <img [src]="item.src" alt="" [matTooltip]="item.name">
+          </button>
+        </div>
+      </div>
+
+      <div class="all-user-items">
+        <!--      todo: make item with 2 buttons: equip + remove-->
+        <div class="selected-items">
+          <h2>Bench Items</h2>
+          <button class="item-btn selected" *ngFor="let item of selectedItems">
+            <img [src]="item.src" alt="" [matTooltip]="item.description" (click)="equipItemFromSelected(item)">
+            <a class='remove-item' (click)="removeItemFromSelected(item)">&#10005;</a>
+            <span class="item-counter">{{item.selectedAmount}}</span>
+          </button>
+        </div>
+        <div class="possible-to-combine">
+          <h2>Possible to combine</h2>
+          <button class="item-btn equipped" *ngFor="let item of possibleToCombineItems" (click)="equipItemFromParts(item)">
+            <img [src]="item.src" alt="" [matTooltip]="item.description">
+          </button>
+        </div>
+        <div class="equipped-items">
+          <h2>Equipped Items</h2>
+          <button class="item-btn equipped" *ngFor="let item of equippedItems" (click)="moveBackToSelectedItems(item)">
+            <img [src]="item.src" alt="" [matTooltip]="item.description"><span class="item-counter">{{item.equippedAmount}}</span>
+          </button>
+        </div>
+<!--        todo: add augments-->
+        <div class="augments">
+          <h2>Augments</h2>
+<!--          <button class="item-btn equipped" *ngFor="let item of equippedItems" (click)="moveBackToSelectedItems(item)">-->
+<!--            <img [src]="item.src" [matTooltip]="item.description"><span class="item-counter"></span>-->
+<!--          </button>-->
+        </div>
+      </div>
+    </div>
+    <div class="suited-comps">
+      <suited-composition-info *ngFor="let comp of suitedComps"></suited-composition-info>
+    </div>
+  </div>
+  <div class="flex-column composition">
+    <img [src]="imageSrc" alt="">
+  </div>
+
+</div>

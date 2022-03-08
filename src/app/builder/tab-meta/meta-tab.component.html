@@ -1,0 +1,44 @@
+<h2 *ngIf="selectedComp.name !== 'default'">{{selectedComp.parentName}}&nbsp;{{selectedComp.name}}</h2>
+<div class="row">
+  <div class="column x1">
+    <!--      <meta-builds-by-rank-tree *ngIf="selectedComp.name === 'default'"-->
+    <!--        (selectedCompChanged)="onSelectionChanged($event)"></meta-builds-by-rank-tree>-->
+    <div class="build-description" *ngIf="selectedComp.name !== 'default'">
+      <br>
+      <h2>Composition description:</h2>
+      <p>Difficulty:<span>{{selectedComp.description.difficulty}}</span></p>
+      <p>Item/Augment Dependency:<span>{{selectedComp.description.dependency}}</span></p>
+      <p>Requirements:<span>{{selectedComp.description.requirements}}</span></p>
+      <p>Item Holder:<span>{{selectedComp.description.itemHolder}}</span></p>
+      <p id="newline">How to Play:<span>{{selectedComp.description.howToPlay}}</span></p>
+      <p>Core:<span>{{selectedComp.description.core}}</span></p>
+      <p>Augments:<span>{{selectedComp.description.augments}}</span></p>
+      <p>Counters:<span>{{selectedComp.description.counters}}</span></p>
+    </div>
+    <div class="build-description" *ngIf="selectedComp.name === 'default'">
+<!--      todo: change description-->
+      <h2>Meta Snapshot Summary</h2>
+      <h3>Updated 12/31</h3>
+
+      <p>1 more weeks of B patch. Next patch on 1/5/22 in the new year!</p>
+
+      <p>NOTE: Augments greatly change the comp you run. For example if you get lots of emblems, you don’t need to run certain units or you chase an 8 or 9 synergy. Adaptation to your augments/items/units is key in Set 6</p>
+
+      <p>Check out the Patch Review!</p>
+
+      <p>Be on the lookout by bookmarking this page or subscribing to my YouTube for the latest news and comps.</p>
+
+      <p>Check LEVELING GUIDE so you know what to do for each comp (includes reroll)</p>
+
+      <p>Quick Tips for Climbing at Start of Season</p>
+
+      <p>9 Advanced Tips to get to Challenger</p>
+    </div>
+  </div>
+  <div class="column x2">
+    <h2 *ngIf="selectedComp.name === 'default'">Best TFT Comps for Set 6 Patch 11.24b</h2>
+    <img *ngIf="selectedComp.name !== 'default'" [src]='selectedComp.imageSrc' alt="build image from lolchess.gg">
+    <meta-builds-by-rank-tree
+      (selectedCompChanged)="onSelectionChanged($event)"></meta-builds-by-rank-tree>
+  </div>
+</div>
