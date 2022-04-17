@@ -17,6 +17,32 @@
       </div>
 
       <div class="all-user-items">
+
+        <div class="augments">
+          <h2>Augments</h2>
+          <mat-form-field appearance="fill">
+            <mat-label>Tier 1 Augments</mat-label>
+            <mat-select [formControl]="selectedTier1Augments" multiple (selectionChange)="onAugmentSelectionChange()">
+              <mat-option *ngFor="let augment of tier1Augments" [value]="augment">{{augment.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Tier 2 Augments</mat-label>
+            <mat-select [formControl]="selectedTier2Augments" multiple (selectionChange)="onAugmentSelectionChange()">
+              <mat-option *ngFor="let augment of tier2Augments" [value]="augment">{{augment.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Tier 3 Augments</mat-label>
+            <mat-select [formControl]="selectedTier3Augments" multiple (selectionChange)="onAugmentSelectionChange()">
+              <mat-option *ngFor="let augment of tier3Augments" [value]="augment">{{augment.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="selected-augments" *ngFor="let augment of selectedAugments"></div>
+        </div>
         <!--      todo: make item with 2 buttons: equip + remove-->
         <div class="selected-items">
           <h2>Bench Items</h2>
@@ -38,18 +64,14 @@
             <img [src]="item.src" alt="" [matTooltip]="item.description"><span class="item-counter">{{item.equippedAmount}}</span>
           </button>
         </div>
-<!--        todo: add augments-->
-        <div class="augments">
-          <h2>Augments</h2>
-<!--          <button class="item-btn equipped" *ngFor="let item of equippedItems" (click)="moveBackToSelectedItems(item)">-->
-<!--            <img [src]="item.src" [matTooltip]="item.description"><span class="item-counter"></span>-->
-<!--          </button>-->
-        </div>
       </div>
     </div>
-    <div class="suited-comps">
-      <suited-composition-info *ngFor="let comp of suitedComps"></suited-composition-info>
-    </div>
+
+    <suited-compositions
+      [compositions]="suitedComps"
+      [selectedItems]="selectedItems"
+      [selectedAugments]="selectedAugments">
+    </suited-compositions>
   </div>
   <div class="flex-column composition">
     <img [src]="imageSrc" alt="">

@@ -2,8 +2,11 @@ import {Item} from "./items-interface";
 
 export interface Composition {
   name: string;
-  mainCarry: CarryChampion;
-  tank: CarryChampion;
+  tier: string;
+  bestItems: { itemId: string, amount: number }[];
+  bestAugments: string[];
+  mainCarry?: CarryChampion;
+  tank?: CarryChampion;
   secondCarry?: CarryChampion;
 }
 

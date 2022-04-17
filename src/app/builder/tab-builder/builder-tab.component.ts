@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ItemsService} from "../../services/items.service";
-import {Item} from "../../interfaces/items-interface";
+import {Augment, Item} from "../../interfaces/items-interface";
 import {Composition} from "../../interfaces/composition-interface";
+import {AllCompsService} from "../../services/all-comps.service";
+import {AllAugmentsDatasourceService} from "../../services/all-augments-datasource.service";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-builder-tab',
@@ -13,6 +16,9 @@ export class BuilderTabComponent implements OnInit {
 
   constructor(
     private itemsService: ItemsService,
+    private allCompService: AllCompsService,
+    private allAugmentDataSource: AllAugmentsDatasourceService,
+
   ) {}
 
   ngOnInit(): void {
@@ -24,7 +30,16 @@ export class BuilderTabComponent implements OnInit {
   equippedItems: Item[] = [];
   possibleToCombineItems: Item[] = [];
 
-  allMetaComps: Composition[] = [];
+  allAugments: Augment[] = this.allAugmentDataSource.allAugments;
+  tier1Augments: Augment[] = this.allAugments.filter(augment => augment.tier === 1);
+  tier2Augments: Augment[] = this.allAugments.filter(augment => augment.tier === 2);
+  tier3Augments: Augment[] = this.allAugments.filter(augment => augment.tier === 3);
+  selectedTier1Augments = new FormControl([]);
+  selectedTier2Augments = new FormControl([]);
+  selectedTier3Augments = new FormControl([]);
+  selectedAugments: Augment[] = [];
+
+  allMetaComps: Composition[] = this.allCompService.allComps;
   suitedComps: Composition[] = [];
 
 
@@ -132,10 +147,24 @@ export class BuilderTabComponent implements OnInit {
     this.suitedComps = this.calculateSuitedComps(allUserItems);
   }
 
+  // todo: first step - check only by items and maybe filter after by 'wrong' augments
   calculateSuitedComps(allUserItems: Item[]): Composition[] {
     return this.allMetaComps.filter(composition => {
-      // todo: add logic
+      if (this.selectedAugments.length) {
+        // todo filter by wrong augments
+      }
+      return this.checkIfCompSuitedByItems(composition);
     })
   }
+
+  checkIfCompSuitedByItems(composition: Composition): boolean {
+    // todo:
+    return true;
+  }
+
+  onAugmentSelectionChange() {
+    this.selectedAugments = [...this.selectedTier1Augments.value, ...this.selectedTier2Augments.value, ...this.selectedTier3Augments.value ];
+    console.log(this.selectedAugments);
+  };
 
 }

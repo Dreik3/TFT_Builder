@@ -9,3 +9,10 @@ export interface Item {
   parts: string[],
   wearers: string[],
 }
+
+// todo: rename file or move this interface
+export interface Augment {
+  name: string;
+  effect: string;
+  tier: number;
+}
